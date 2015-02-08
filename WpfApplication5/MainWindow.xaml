@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WpfApplication5"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="525">
     
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -16,6 +16,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:ViewModelB}">
             <CheckBox Content="{Binding Label}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="testKey">
+            <TextBlock Text="{Binding Label}"/>
         </DataTemplate>
     </Window.Resources>
 
@@ -36,6 +39,9 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
+        
+        <ContentControl Content="{Binding ContentViewModel}" Height="100"
+                        ContentTemplate="{StaticResource testKey}"/>
 
         <Button Content="ContentViewModel 切り替え"
                 Command="{Binding SwitchContentViewModelCommand}"/>
