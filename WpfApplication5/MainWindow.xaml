@@ -1,0 +1,45 @@
+﻿<Window x:Class="WpfApplication5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfApplication5"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="350" Width="525">
+    
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:ViewModelA}">
+            <Button Content="{Binding Label}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ViewModelB}">
+            <CheckBox Content="{Binding Label}"/>
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <StackPanel>
+        <ContentControl Content="{Binding ContentViewModel}" Height="100">
+            <!-- 親のリソースを使う -->
+        </ContentControl>
+
+        <ContentControl Content="{Binding ContentViewModel}" Height="100">
+            <!-- 自分のリソースを定義 -->
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type local:ViewModelA}">
+                    <CheckBox Content="{Binding Label}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:ViewModelB}">
+                    <Button Content="{Binding Label}"/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+
+        <Button Content="ContentViewModel 切り替え"
+                Command="{Binding SwitchContentViewModelCommand}"/>
+    </StackPanel>
+    
+    
+</Window>
